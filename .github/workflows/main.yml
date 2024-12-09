@@ -33,7 +33,7 @@ jobs:
           password: ${{ secrets.LIFECYCLE_PASSWORD }}
           application-id: struts2-rce-github-mc
           scan-targets: target/struts2-rest-showcase.war
-          sarif_file: 'sarif_file.sarif'
+          sarif-file: 'result.sarif'
           upload-sarif-file: 'true'
       # Print out the results
       - name: Log evaluate action output
