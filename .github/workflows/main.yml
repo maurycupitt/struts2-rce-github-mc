@@ -1,0 +1,38 @@
+name: Sonatype Lifecycle Evaluation
+on: push
+jobs:
+  sonatype-cli:
+    runs-on: ubuntu-latest
+    steps:
+      # some steps are omitted...
+      # Check out your code
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v4
+      # Perform an evaluation
+      - name: Setup Java JDK
+        uses: actions/setup-java@v4.5.0
+        with:
+          java-version: 1.8
+      - name: Maven Package
+        uses: Best-Quality-Engineering/ci-maven-action@v1
+        with:
+          phases: package
+      - name: Setup Java JDK
+        uses: actions/setup-java@v4.5.0
+        with:
+          java-version: 17
+      - name: Run evaluate action
+        id: evaluate
+        uses: sonatype/actions/evaluate@v1.1.0
+        with:
+          iq-server-url: https://iq.mcupitt.ngrok.io
+          username: ${{ secrets.LIFECYCLE_USERNAME }}
+          password: ${{ secrets.LIFECYCLE_PASSWORD }}
+          application-id: struts2-rce-github-mc
+          scan-targets: target/struts2-rest-showcase.war
+          sarif_file: 'sarif_file.sarif'
+          upload-sarif-file: 'true'
+      # Print out the results
+      - name: Log evaluate action output
+        run: echo "${{ steps.evaluate.outputs.scan-id }} ${{ steps.evaluate.outputs.report-url }}"
