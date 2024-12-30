@@ -1,4 +1,4 @@
-[![DepShield Badge](https://depshield.sonatype.org/badges/sonatype-nexus-community/struts2-rce/depshield.svg)](https://depshield.github.io)
+![Alt](https://repobeats.axiom.co/api/embed/ba4cfb6dc29d09132c1282507e79bfcfab557d5c.svg "Repobeats analytics image")
 
 ## Exploit Demo for CVE-2017-5638 (Struts2 RCE and CVE-2022-44228 (Log4Shell)
 
